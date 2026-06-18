@@ -4,6 +4,6 @@
 bin/
 docs/
 
+*.md
 *.make
 Makefile
-.clang-format
