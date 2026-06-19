@@ -6,23 +6,27 @@
 #include "../projectile/projectile.hpp"
 #include <entity/entity.hpp>
 
-class Player : public Entity {
+class Player : public Entity
+{
  private:
-  Vector2 position =
-      Vector2({ GetScreenWidth() / 2.0f, GetScreenHeight() - 24.0f });
-  float speed = 4.0f;
-  float hp = 4;
+  float hp = 3;
   std::vector<Projectile> projectile_s = {};
   int projectileCountMax = 1;
 
-  int margin = 24.0f;
+  float margin = 24.0f;
+  float radius = 12.0f;
 
  public:
-  Player(/* args */);
+  Player();
   ~Player();
 
+  void Update();
   void Draw();
   void Shoot();
+  void TakeDamage();
+  bool IsDead() const;
+  float GetHP() const;
+  Rectangle GetBounds() const;
   std::vector<Projectile>& GetProjectiles();
   void RemoveProjectile(int index);
 };

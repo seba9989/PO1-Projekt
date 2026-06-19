@@ -2,7 +2,7 @@ workspace "space-invaders"
     configurations { "Debug", "Release" }
     architecture "x86_64"
 
-project "arkanoid"
+project "space-invaders"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++20"

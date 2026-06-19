@@ -1,7 +1,8 @@
 #pragma once
 #include <raylib.h>
 
-class Entity {
+class Entity
+{
  protected:
   Vector2 position;
   float speed;

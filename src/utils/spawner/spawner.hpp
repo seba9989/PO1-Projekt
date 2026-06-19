@@ -1,11 +1,12 @@
 #pragma once
 #include <vector>
 #include <raylib.h>
+#include "entity/enemy/enemy.hpp"
 
-class Spawner {
- private:
-  /* data */
+class Spawner
+{
  public:
-  Spawner(/* args */);
+  Spawner();
   ~Spawner();
+  std::vector<Enemy> SpawnWave(int rows, int cols);
 };
