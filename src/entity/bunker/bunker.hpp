@@ -4,32 +4,34 @@
 
 /**
  * @brief Klasa reprezentująca pojedynczy blok bunkra.
- * 
- * Bunkier jest niszczalną przesłoną (voxel-like), składającą się z wielu takich 
- * bloków. Każdy blok ma domyślnie 1 HP, więc niszczy się od pojedynczego trafienia.
+ *
+ * Bunkier jest niszczalną przesłoną (voxel-like), składającą się z wielu takich
+ * bloków. Każdy blok ma domyślnie 1 HP, więc niszczy się od pojedynczego
+ * trafienia.
  */
 class Bunker : public Entity
 {
  private:
-  int hp = 1;          ///< Aktualne punkty życia bloku bunkra.
-  int maxHp = 1;       ///< Maksymalne punkty życia bloku bunkra.
-  float width = 10.0f; ///< Szerokość pojedynczego bloku w pikselach.
-  float height = 10.0f;///< Wysokość pojedynczego bloku w pikselach.
+  int hp = 1;            ///< Aktualne punkty życia bloku bunkra.
+  int maxHp = 1;         ///< Maksymalne punkty życia bloku bunkra.
+  float width = 10.0f;   ///< Szerokość pojedynczego bloku w pikselach.
+  float height = 10.0f;  ///< Wysokość pojedynczego bloku w pikselach.
 
  public:
   /**
-   * @brief Konstruktor bloku bunkra.
+   * @brief Inicjalizuje pojedynczy blok bunkra.
    * @param position Pozycja startowa (lewy górny róg) bloku.
    */
   Bunker(Vector2 position);
 
   /**
-   * @brief Destruktor bloku bunkra.
+   * @brief Zwalnia zasoby bloku bunkra.
    */
   ~Bunker() = default;
 
   /**
-   * @brief Aktualizuje logikę bloku (obecnie blok jest statyczny, więc nic nie robi).
+   * @brief Aktualizuje logikę bloku (obecnie blok jest statyczny, więc nic nie
+   * robi).
    */
   void Update() override;
 

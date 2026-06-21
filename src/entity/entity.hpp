@@ -15,7 +15,7 @@ class Entity
 
  public:
   /**
-   * @brief Wirtualny destruktor klasy bazowej.
+   * @brief Zwalnia zasoby wirtualnej klasy bazowej.
    */
   virtual ~Entity() = default;
 

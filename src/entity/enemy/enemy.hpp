@@ -7,46 +7,58 @@
 
 /**
  * @brief Klasa reprezentująca wrogiego kosmitę.
- * 
- * Kosmici poruszają się wspólnie w rzędach i kolumnach, mogą schodzić w dół ekranu
- * i strzelać własnymi pociskami.
+ *
+ * Kosmici poruszają się wspólnie w rzędach i kolumnach, mogą schodzić w dół
+ * ekranu i strzelać własnymi pociskami.
  */
-class Enemy : public Entity {
+class Enemy : public Entity
+{
  private:
-  float hp = 3;                                ///< Punkty życia wroga.
-  std::vector<Color> color_s = { RED, ORANGE, BLUE }; ///< Paleta kolorów wskazująca stan HP.
-  std::vector<Projectile> projectile_s = {};   ///< Kontener aktywnych pocisków wystrzelonych przez wroga.
-  int projectileCountMax = 1;                  ///< Maksymalna liczba pocisków wroga jednocześnie na ekranie.
+  float hp = 3;  ///< Punkty życia wroga.
+  std::vector<Color> color_s = {
+    RED, ORANGE, BLUE
+  };  ///< Paleta kolorów wskazująca stan HP.
+  std::vector<Projectile> projectile_s = {};  ///< Kontener aktywnych pocisków
+                                              ///< wystrzelonych przez wroga.
+  int projectileCountMax =
+      1;  ///< Maksymalna liczba pocisków wroga jednocześnie na ekranie.
 
-  float margin = 24.0f;                        ///< Margines ekranu używany do detekcji nawrotów.
-  float width = 30.0f;                         ///< Szerokość prostokąta wroga.
-  float height = 25.0f;                        ///< Wysokość prostokąta wroga.
-  float dropAmount = 5.0f;                     ///< O ile pikseli w dół przesuwa się wróg przy dojściu do krawędzi.
+  float margin = 24.0f;     ///< Margines ekranu używany do detekcji nawrotów.
+  float width = 30.0f;      ///< Szerokość prostokąta wroga.
+  float height = 25.0f;     ///< Wysokość prostokąta wroga.
+  float dropAmount = 5.0f;  ///< O ile pikseli w dół przesuwa się wróg przy
+                            ///< dojściu do krawędzi.
 
  public:
-  static int moveDirection;   ///< Globalny kierunek ruchu wszystkich wrogów (1 = prawo, -1 = lewo).
-  static bool needsDropDown;  ///< Flaga wskazująca, czy cała fala musi przesunąć się w dół (ktoś dotknął krawędzi).
+  static int moveDirection;  ///< Globalny kierunek ruchu wszystkich wrogów (1 =
+                             ///< prawo, -1 = lewo).
+  static bool needsDropDown;  ///< Flaga wskazująca, czy cała fala musi
+                              ///< przesunąć się w dół (ktoś dotknął krawędzi).
 
-  bool canShoot = false;      ///< Flaga logiczna determinująca, czy dany wróg jest w linii frontu i może strzelać.
-  int row = 0;                ///< Indeks rzędu wroga w fali (0 to najwyższy).
-  int col = 0;                ///< Indeks kolumny wroga w fali.
+  bool canShoot = false;  ///< Flaga logiczna determinująca, czy dany wróg jest
+                          ///< w linii frontu i może strzelać.
+  int shootChance =
+      100;      ///< Szansa na strzał w każdej klatce (losowanie z przedziału).
+  int row = 0;  ///< Indeks rzędu wroga w fali (0 to najwyższy).
+  int col = 0;  ///< Indeks kolumny wroga w fali.
 
   /**
-   * @brief Konstruktor domyślny wroga (ustawia w centrum ekranu).
+   * @brief Inicjalizuje wroga (ustawia w centrum ekranu).
    */
   Enemy();
 
   /**
-   * @brief Konstruktor wroga dla trybu fali.
-   * 
+   * @brief Inicjalizuje wroga dla trybu fali.
+   *
    * @param position Pozycja początkowa na ekranie.
    * @param row Rząd wroga (liczony od góry).
    * @param col Kolumna wroga (liczona od lewej).
+   * @param level Aktualny poziom gry (determinuje prędkość strzelania i ruchu).
    */
-  Enemy(Vector2 position, int row, int col);
+  Enemy(Vector2 position, int row, int col, int level = 1);
 
   /**
-   * @brief Destruktor wroga.
+   * @brief Zwalnia zasoby wroga.
    */
   ~Enemy();
 

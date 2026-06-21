@@ -17,7 +17,7 @@ class Projectile
 
  public:
   /**
-   * @brief Konstruktor pocisku.
+   * @brief Inicjalizuje obiekt pocisku.
    * 
    * @param position Pozycja startowa pocisku.
    * @param direction Kierunek (-1 dla gracza, 1 dla wroga). Domyślnie -1.
@@ -26,7 +26,7 @@ class Projectile
   Projectile(Vector2 position, int direction = -1, float speed = 4.0f);
 
   /**
-   * @brief Destruktor pocisku.
+   * @brief Zwalnia zasoby pocisku.
    */
   ~Projectile();
 

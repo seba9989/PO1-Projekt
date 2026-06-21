@@ -21,16 +21,17 @@ class Player : public Entity
 
   float margin = 24.0f;                        ///< Margines ruchu przy krawędziach ekranu.
   float radius = 12.0f;                        ///< Promień (rozmiar) gracza używany w obliczeniach kolizji.
+  float doubleShotTimer = 0.0f;                ///< Zegar podwójnego strzału (w sekundach).
 
  public:
   /**
-   * @brief Konstruktor domyślny klasy Player.
-   * Ustala pozycję początkową i parametry gracza.
+   * @brief Inicjalizuje obiekt gracza.
+   * Ustala pozycję początkową i parametry.
    */
   Player();
 
   /**
-   * @brief Destruktor klasy Player.
+   * @brief Zwalnia zasoby gracza.
    */
   ~Player();
 
@@ -53,6 +54,18 @@ class Player : public Entity
    * @brief Redukuje punkty życia gracza po trafieniu.
    */
   void TakeDamage();
+
+  /**
+   * @brief Leczy gracza (zwiększa punkty życia).
+   * @param amount Ilość punktów do wyleczenia.
+   */
+  void Heal(float amount);
+
+  /**
+   * @brief Aktywuje tryb podwójnego strzału na podany czas.
+   * @param duration Czas trwania bonusu w sekundach.
+   */
+  void ActivateDoubleShot(float duration);
 
   /**
    * @brief Sprawdza, czy gracz stracił wszystkie punkty życia.

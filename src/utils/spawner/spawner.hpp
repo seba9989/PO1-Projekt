@@ -13,12 +13,12 @@ class Spawner
 {
  public:
   /**
-   * @brief Domyślny konstruktor spawnera.
+   * @brief Inicjalizuje obiekt spawnera.
    */
   Spawner() = default;
 
   /**
-   * @brief Domyślny destruktor spawnera.
+   * @brief Zwalnia zasoby spawnera.
    */
   ~Spawner() = default;
 
@@ -47,16 +47,17 @@ class Spawner
    * 
    * @param rows Liczba rzędów wrogów.
    * @param cols Liczba kolumn wrogów.
+   * @param level Aktualny poziom trudności.
    * @return Wektor zawierający falę wrogów ustawionych na pozycjach startowych.
    */
-  std::vector<Enemy> SpawnWave(int rows, int cols)
+  std::vector<Enemy> SpawnWave(int rows, int cols, int level = 1)
   {
     std::vector<Enemy> wave;
     float startX = (GetScreenWidth() - (cols * 50.0f)) / 2.0f;
     for (int r = 0; r < rows; r++)
     {
       for (int c = 0; c < cols; c++) {
-        wave.emplace_back(Vector2{startX + c * 50.0f, 50.0f + r * 40.0f}, r, c);
+        wave.emplace_back(Vector2{startX + c * 50.0f, 50.0f + r * 40.0f}, r, c, level);
       }
     }
     return wave;

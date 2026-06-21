@@ -11,10 +11,14 @@ Enemy::Enemy()
   speed = 1.5f;
 }
 
-Enemy::Enemy(Vector2 position, int row, int col)
+Enemy::Enemy(Vector2 position, int row, int col, int level)
 {
   this->position = position;
-  speed = 0.5f;
+  this->speed =
+      0.5f + (level * 0.2f);  // Zwiększanie prędkości ruchu wraz z poziomem
+  this->shootChance = 100 - (level * 5);  // Zwiększanie szansy na strzał
+  if (this->shootChance < 20)
+    this->shootChance = 20;  // Hard cap, żeby gra była w ogóle możliwa
   this->row = row;
   this->col = col;
 }
@@ -37,10 +41,11 @@ void Enemy::Update()
   {
     p.Update();
   }
-  std::erase_if(projectile_s, [](const Projectile& p) { return !p.IsActive(); });
+  std::erase_if(projectile_s,
+                [](const Projectile& p) { return !p.IsActive(); });
 
-  // Losowe strzelanie (szansa 1/100 na klatkę)
-  if (canShoot && (std::rand() % 100 == 0))
+  // Losowe strzelanie bazujące na shootChance (które zależy od poziomu)
+  if (canShoot && (std::rand() % shootChance == 0))
   {
     Shoot();
   }
@@ -49,7 +54,26 @@ void Enemy::Update()
 void Enemy::Draw()
 {
   if (IsDead()) return;
-  DrawRectangle(position.x, position.y, width, height, color_s.at(hp - 1));
+
+  Color c = color_s.at(hp - 1);
+  float x = position.x;
+  float y = position.y;
+
+  // Czułki
+  DrawRectangle(x + 4, y, 4, 5, c);
+  DrawRectangle(x + 22, y, 4, 5, c);
+  // Górna część głowy
+  DrawRectangle(x + 8, y + 4, 14, 6, c);
+  // Główny tułów
+  DrawRectangle(x, y + 10, 30, 10, c);
+  // Oczy (wycięte, czyli czarne)
+  DrawRectangle(x + 6, y + 12, 4, 4, BLACK);
+  DrawRectangle(x + 20, y + 12, 4, 4, BLACK);
+  // Nóżki / Macki
+  DrawRectangle(x, y + 20, 6, 5, c);
+  DrawRectangle(x + 10, y + 20, 4, 5, c);
+  DrawRectangle(x + 16, y + 20, 4, 5, c);
+  DrawRectangle(x + 24, y + 20, 6, 5, c);
 
   // Rysuj pociski wroga
   for (auto& p : projectile_s)
