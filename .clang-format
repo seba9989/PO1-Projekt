@@ -1,5 +1,5 @@
 BasedOnStyle: Google
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 SortIncludes: Never
 ColumnLimit: 80
 Cpp11BracedListStyle: false
